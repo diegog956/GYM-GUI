@@ -6,6 +6,7 @@ import pywinstyles
 from PIL import Image
 import tkinter as tk
 from GUI.Access_Window.Access_Frame import Access_Frame
+import re
 
 
 class Central_Frame(ctk.CTkFrame):
@@ -83,23 +84,26 @@ class Central_Frame(ctk.CTkFrame):
     def focus_to_entry(self, event=None) -> None:
         # Check if the clicked widget is another entry (assuming you have multiple)
         if isinstance(event.widget, tk.Entry) and event.widget != self.entry_id:
-            return  None # Do nothing if clicking on another entry
+            return None  # Do nothing if clicking on another entry
 
         # Otherwise, set focus back to the original entry
         self.entry_id.focus_set()
 
     def check_access(self, event=None) -> None:
-        if self.entry_id.get() == '':
+        if bool(re.search('\s+', self.entry_id.get())) or self.entry_id.get().isalpha() or self.entry_id.get() == '':
 
-            ''' AGREGAR INGRESO NULO, STRING'''
-            ''' AGREGAR NULA EXISTENCIA DE ID'''
-
+            no_text_or_string_label = ctk.CTkLabel(self, text='Wrong! ID must have only numbers.',
+                                                   font=('Helvetica', 12),
+                                                   fg_color='#343434', text_color='red')
+            no_text_or_string_label.grid(row=42, column=0, sticky='e', padx=10)
+            self.entry_id.delete(0, tk.END)
+            no_text_or_string_label.after(2000, lambda: no_text_or_string_label.destroy())
             pass
         else:
 
             # Create the green/red access frame
             access_frame = Access_Frame(self.app, self.entry_id.get())
-            access_frame.grid(row=1, column=0, columnspan=3,  sticky='nsew')
+            access_frame.grid(row=1, column=0, columnspan=3, sticky='nsew')
 
             # Set the opacity of the access frame on 0
             pywinstyles.set_opacity(access_frame, value=0)
@@ -123,6 +127,3 @@ class Central_Frame(ctk.CTkFrame):
 
             # Remove the ID from the screen
             self.entry_id.delete(0, tk.END)
-
-
-

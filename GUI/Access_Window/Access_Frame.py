@@ -47,17 +47,6 @@ class Access_Frame(ctk.CTkFrame):
         self.configure(border_width=2)
         self.configure(border_color='#2CC985')
 
-        #
-        # #Profile Image
-        # path = 'GUI/Access_Window/assets/customers/' + str(self.id) + '.png'
-        # frame_width = self.winfo_width()  # Ancho del frame
-        # frame_height = self.winfo_height()  # Alto del frame
-        # profile_image = ctk.CTkImage(dark_image=Image.open(path), size=(frame_width, frame_height))
-        #
-        # image_label = ctk.CTkLabel(self, image=profile_image, text='', corner_radius=180, bg_color='#106A43')
-        #
-        # image_label.grid(row=0, column=0, rowspan=40, sticky='ns')
-
         # "Access Granted" label text
         entry_access_granted_text = ctk.CTkLabel(self, text='ACCESS GRANTED', text_color='light gray',
 
