@@ -7,7 +7,7 @@ class Image_Frame(ctk.CTkFrame):
 
     def __init__(self, app: ctk.CTk):
         super().__init__(app)
-
+        self.app = app
         # Grid Configuration
         # Row/s
         self.grid_rowconfigure(0, weight=3)
@@ -25,7 +25,7 @@ class Image_Frame(ctk.CTkFrame):
         self.aux_label.grid(row=0, column=0, columnspan=3, rowspan=3, sticky='nswe')
 
         # Central Frame
-        self.central_frame = Central_Frame(self)
+        self.central_frame = Central_Frame(self, self.app)
         self.central_frame.grid(row=0, column=1, rowspan=3,sticky='nsew')
 
         # Bind the dimension changes resizing the frame
@@ -38,3 +38,7 @@ class Image_Frame(ctk.CTkFrame):
         # Opens the images setting the width and height of the app with the window one and put it on the same label
         i = ctk.CTkImage(dark_image=self.original_image, size=(self.winfo_width(), self.winfo_height()))
         self.aux_label.configure(text="", image=i)
+
+    def create_image_frame(self):
+        self.central_frame = Central_Frame(self, self.app)
+        self.central_frame.grid(row=0, column=1, rowspan=3, sticky='nsew')
