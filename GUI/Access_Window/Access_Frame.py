@@ -81,9 +81,9 @@ class Access_Frame(ctk.CTkFrame):
         self.configure(fg_color="#ED4337")
 
         # "Access Denied" label text
-        entry_fullname_text = ctk.CTkLabel(self, text='ACCESS DENIED', text_color='light gray', fg_color="#ED4337",
+        entry_fullname_text = ctk.CTkLabel(self, text='ACCESS DENIED', text_color='light white', fg_color="#ED4337",
                                            font=('Roboto', 50))
-        entry_fullname_text.grid(row=0, column=1, rowspan=3, sticky='nsew')
+        entry_fullname_text.grid(row=1, column=1, rowspan=2, sticky='nsew')
 
     def check_due_date(self) -> bool:
         return datetime.date.today() >= self.due_date

@@ -12,10 +12,11 @@ from GUI.Admin_Window.Admin_Frame import Admin_Frame
 
 class Central_Frame(ctk.CTkFrame):
 
-    def __init__(self, app: ctk.CTkFrame, master1: ctk.CTk):
+    def __init__(self, app: ctk.CTkFrame, master1: ctk.CTk, show_admin_frame):
         super().__init__(app, bg_color='black', corner_radius=0, fg_color='#343434')
         self.master1 = master1
         self.app = app
+        self.show_admin_frame = show_admin_frame
         # Set the Frame opacity:
         pywinstyles.set_opacity(self, value=0.97)
 
@@ -137,45 +138,12 @@ class Central_Frame(ctk.CTkFrame):
         user = self.admin_user_entry.get()
         password = self.admin_password_entry.get()
 
-        print(user, password)
-
         if user == '1' and password == '1':
-            self.destroy()
-            self.app.grid_rowconfigure(0, weight=1)
-            self.app.grid_rowconfigure(1, weight=8)
-            self.app.grid_rowconfigure(2, weight=1)
 
-            # Columns
-            self.app.grid_columnconfigure(0, weight=1)
-            self.app.grid_columnconfigure(1, weight=4)
-            self.app.grid_columnconfigure(2, weight=1)
+            self.show_admin_frame()
 
-            self.admin_frame = Admin_Frame(self.app)
-            pywinstyles.set_opacity(self.admin_frame, 0.97)
-            self.admin_frame.grid(column=1, row=1, sticky='nsew')
-
-            back_button = ctk.CTkButton(self.admin_frame, text='Volver', command=self.back_main_frame)
-            back_button.place(x=10,y=10)
-
-
+            pass
         else:
+
             pass
 
-    def back_main_frame(self):
-        self.admin_frame.destroy()
-
-        self.app.grid_rowconfigure(0, weight=3)
-        self.app.grid_rowconfigure(1, weight=1)
-        self.app.grid_rowconfigure(2, weight=3)
-
-        # Columns
-        self.app.grid_columnconfigure(0, weight=5)
-        self.app.grid_columnconfigure(1, weight=2)
-        self.app.grid_columnconfigure(2, weight=5)
-
-        from GUI.Access_Window.Image_Frame import Image_Frame
-        Image_Frame.create_image_frame(self.app)
-
-
-        # central_frame = Central_Frame(self, self.master1)
-        # central_frame.grid(row=0, column=1, rowspan=3, sticky='nsew')
