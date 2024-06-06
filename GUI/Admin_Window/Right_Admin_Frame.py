@@ -1,6 +1,6 @@
 import customtkinter as ctk
-
-
+import tkinter as tk
+import tkcalendar as tkc
 
 
 class Right_Admin_Frame(ctk.CTkFrame):
@@ -12,13 +12,42 @@ class Right_Admin_Frame(ctk.CTkFrame):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        self.button = ctk.CTkButton(self, text='boton', command=self.controller.change())
+        self.add_member_onto_right_frame()
 
-        self.button.grid(row=0, column=0)
+    def add_member_onto_right_frame(self):
+        for i in range(3):
+            self.grid_columnconfigure(i, weight=1)
 
-    def funciones(self):
+        for i in range(20):
+            self.grid_rowconfigure(i, weight=1)
 
-    # Lo relevante en terminos de cambio de right admin frame va aca,
-    # y luego se llama desde el Admin_Frame en una funcion homnima
+        # Name
+        name_entry = ctk.CTkEntry(self, font=('Helvetica', 20))
+        name_entry.grid(row=3, column=1, sticky='ew')
 
-        pass
+        # Last Name
+        last_name_entry = ctk.CTkEntry(self, font=('Helvetica', 20))
+        last_name_entry.grid(row=4, column=1, sticky='ew')
+
+        # Birthday
+        date_entry = tkc.DateEntry(self, year=2024, background='darkblue', foreground='white',
+                                   month=6, day=6)
+        date_entry.grid(row=5, column=1, sticky='nsew')
+
+        # Phone
+        phone_entry = ctk.CTkEntry(self, font=('Helvetica', 20))
+        phone_entry.grid(row=6, column=1, sticky='ew')
+
+        # Address
+        address_entry = ctk.CTkEntry(self, font=('Helvetica', 20))
+        address_entry.grid(row=7, column=1, sticky='ew')
+
+        # Email
+        email_entry = ctk.CTkEntry(self, font=('Helvetica', 20))
+        email_entry.grid(row=8, column=1, sticky='ew')
+
+        # Gender
+
+        # Bloodtype
+
+        # MemberType
