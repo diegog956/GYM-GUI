@@ -19,7 +19,6 @@ class Right_Admin_Frame(ctk.CTkFrame):
         self.add_member_onto_right_frame()
 
     def add_member_onto_right_frame(self):
-
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=2)
         self.grid_columnconfigure(2, weight=1)
@@ -29,7 +28,7 @@ class Right_Admin_Frame(ctk.CTkFrame):
 
         # Name
         name_label = ctk.CTkLabel(self, text='Name:', font=('Helvetica', 15))
-        name_label.grid(row=3, column=0, sticky= 'nse', padx=25)
+        name_label.grid(row=3, column=0, sticky='nse', padx=25)
 
         name_entry = ctk.CTkEntry(self, font=('Helvetica', 20))
         name_entry.grid(row=3, column=1, sticky='ew')
@@ -84,7 +83,7 @@ class Right_Admin_Frame(ctk.CTkFrame):
 
         gender_frame = ctk.CTkFrame(self)
 
-        gender_frame.grid_columnconfigure((0,1,2),weight=1)
+        gender_frame.grid_columnconfigure((0, 1, 2), weight=1)
         pywinstyles.set_opacity(gender_frame, value=0.97)
 
         gender_frame.grid(row=9, column=1, sticky='we')
@@ -93,10 +92,13 @@ class Right_Admin_Frame(ctk.CTkFrame):
                                                      border_color='#106A43', hover_color='#2CC985')
         Male_gender_radiobutton.grid(row=0, column=0, sticky='ew')
 
-        Female_gender_radiobutton = ctk.CTkRadioButton(gender_frame, text='Female', value='Female', variable=gender_choice, border_color='#106A43', hover_color='#2CC985')
+        Female_gender_radiobutton = ctk.CTkRadioButton(gender_frame, text='Female', value='Female',
+                                                       variable=gender_choice, border_color='#106A43',
+                                                       hover_color='#2CC985')
         Female_gender_radiobutton.grid(row=0, column=1, sticky='ew')
 
-        Other_gender_radiobutton = ctk.CTkRadioButton(gender_frame, text='Other', value='Other', variable=gender_choice, border_color='#106A43', hover_color='#2CC985')
+        Other_gender_radiobutton = ctk.CTkRadioButton(gender_frame, text='Other', value='Other', variable=gender_choice,
+                                                      border_color='#106A43', hover_color='#2CC985')
         Other_gender_radiobutton.grid(row=0, column=2, sticky='ew')
 
         # Bloodtype
@@ -117,16 +119,32 @@ class Right_Admin_Frame(ctk.CTkFrame):
         membertype = ["Member", "Instructor", "Maintenance", "Cleaning"]
 
         membertype_combobox = ctk.CTkComboBox(self, values=membertype, button_color='#106A43',
-                                             button_hover_color='#2CC985')
+                                              button_hover_color='#2CC985')
         membertype_combobox.grid(row=11, column=1, sticky='ew')
-
 
         # Cancel
 
-        add_button = ctk.CTkButton(self, fg_color='#106A43', text='Cancel')
-        add_button.grid(row=18, column=1, sticky='nsw')
+        cancel_button = ctk.CTkButton(self, fg_color='#106A43', text='Cancel', hover_color='#2CC985',
+                                   )
+        cancel_button.grid(row=16, column=1, sticky='nsw', padx=40)
 
         # Add
 
-        add_button = ctk.CTkButton(self, fg_color='#106A43', text='Add member')
-        add_button.grid(row=18, column=1, sticky='nse')
+        add_button = ctk.CTkButton(self, fg_color='#106A43', text='Add member', hover_color='#2CC985', command=self.add_member)
+        add_button.grid(row=16, column=1, sticky='nse', padx=40)
+
+    def add_member(self) -> None: #Falta que la nueva ventana aparezca encima de la vieja.
+        confirm_window = ctk.CTkToplevel(self)
+
+        confirm_window.title('Are you sure?')
+        height = confirm_window.winfo_screenheight()//2
+        width = confirm_window.winfo_screenwidth()//2
+        confirm_window.geometry(f"400x200+{width}+{height}")
+        confirm_window.resizable(False, False)
+
+        confirm_window.grab_set()
+
+        confirm_window.after(3000, lambda: confirm_window.destroy())
+
+
+
